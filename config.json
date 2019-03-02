@@ -1,0 +1,10 @@
+{
+    "Timeout":5,
+    "ThreadsMax":20,
+    "StatusCode200Only":true,
+    "headers":{
+        "User-Agent":"BasicIndexer/0.0.1 (+https://localhost)"
+    },
+    "fileName":"links.db",
+    "fileFormat":"SQLite"
+}
