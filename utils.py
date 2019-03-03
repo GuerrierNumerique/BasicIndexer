@@ -61,19 +61,24 @@ supportedFormat = [
     "SQLite"
 ]
 
-def saveUrl(req, fileName, format):
+def saveUrl(req, StatusCode200Only, fileName, format):
     global fileIsOpen, red, white, green
     edited = False
     if format == "text":
         while not edited:
             if not fileIsOpen:
                 fileIsOpen = True
+                tmp = False
                 if req.status_code == 200:
                     print(f"{green}[ {white}200 {green}] {white} : {req.url}")
-                    with open("links.txt", "a+") as fp:
-                        fp.write(req.url+"\n")
+                    tmp = True
                 else:
                     print(f"{red}[ {white}{req.status_code} {red}] {white} : {req.url}")
+                    if not StatusCode200Only:
+                        tmp = True
+                if tmp:
+                    with open("links.txt", "a+") as fp:
+                        fp.write(req.url+"\n")
                 fileIsOpen = False
                 edited = True
             else:

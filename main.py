@@ -38,7 +38,7 @@ def checkLink():
         try:
             r = requests.get(link, headers=config["headers"], timeout=config["Timeout"])
             FoundedLinks = utils.getAllLinks(r)
-            utils.saveUrl(r,config["fileName"], config["fileFormat"])
+            utils.saveUrl(r, config["StatusCode200Only"], config["fileName"], config["fileFormat"])
             for currentLink in FoundedLinks:
                 if not currentLink in linksChecked:
                     links.append(currentLink)
