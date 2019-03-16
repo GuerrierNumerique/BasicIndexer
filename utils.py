@@ -1,4 +1,4 @@
-# By Ttatanepvp123
+# Author : Ttatanepvp123
 # Github : https://github.com/ttatanepvp123
 # License : GPL-3 ( https://www.gnu.org/licenses/gpl-3.0.en.html )
 import requests
