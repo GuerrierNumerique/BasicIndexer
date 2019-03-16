@@ -89,6 +89,13 @@ def saveUrl(req, StatusCode200Only, fileName, format):
                 fileIsOpen = True
                 if req.status_code == 200:
                     print(f"{green}[ {white}200 {green}] {white} : {req.url}")
+                    title = None
+                    if "text/html" in req.headers["Content-Type"]:
+                        try:
+                            soup = BeautifulSoup(req.text, "html.parser")
+                            title = soup.head.find('title').text
+                        except:
+                            pass
                     conn = sqlite3.connect(fileName)
                     cursor = conn.cursor()
                     data = {
@@ -97,8 +104,9 @@ def saveUrl(req, StatusCode200Only, fileName, format):
                         "encoding":str(req.encoding).upper(),
                         "timestamp":int(time.time()),
                         "contentType":req.headers["Content-Type"].split(";")[0],
+                        "title":title
                     }
-                    cursor.execute("INSERT INTO urls(url, site, encoding, timestamp, contentType) VALUES(:url, :site, :encoding, :timestamp, :contentType)", data)
+                    cursor.execute("INSERT INTO urls(title, url, site, encoding, timestamp, contentType) VALUES(:title, :url, :site, :encoding, :timestamp, :contentType)", data)
                     cursor.close()
                     conn.commit()
                     conn.close()

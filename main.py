@@ -55,6 +55,7 @@ elif config["fileFormat"] == "SQLite":
     cursor.execute("""
 CREATE TABLE IF NOT EXISTS urls(
      id INTEGER PRIMARY KEY AUTOINCREMENT UNIQUE,
+     title TEXT,
      url TEXT,
      site TEXT,
      contentType TEXT,
